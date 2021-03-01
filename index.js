@@ -19,21 +19,11 @@ async function peticionAxios(url) {
   return response.data;
 }
 
-function replaceContents(file, replacement, cb) {
-  fs.readFile(replacement, (err, contents) => {
-    if (err) return cb(err);
-    fs.writeFile(file, contents, cb);
-  });
-}
-
 http
   .createServer(function (req, res) {
     let body = "";
     let i = 0;
     if (req.url === "/api/proveedores") {
-      replaceContents("index.html","template.html",(err)=>{
-        if (err) throw err;
-      });
       const head = `
       <h1 style="text-align:center;">Listado de proveedores</h1>
       <thead>
@@ -64,9 +54,6 @@ http
         });
       });
     } else if (req.url === "/api/clientes") {
-      replaceContents("index.html","template.html",(err)=>{
-        if (err) throw err;
-      });
       const head = `
       <h1 style="text-align:center;">Listado de clientes</h1>
       <thead>
